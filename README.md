@@ -40,6 +40,7 @@ Assignment list:
 	
 	
 	```
+	import os
 	if not os.path.isdir("cs231n"):
 	  import zipfile
 	  zip_ref = zipfile.ZipFile('cs231n.zip', 'r')

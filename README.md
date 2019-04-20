@@ -34,11 +34,13 @@ Assignment list:
 	
 	I wanted to use google collaboration Jupiter Notebook.
 	The assignment uses scripts from a folder you need to download.
-	To overcome it you need to zip the folder. 
-	Upload it as a file to google collaboration Jupiter Notebook.
-	Then unzip it (you need to hit refresh) before the code starts.
+	1. To overcome it you need to zip the folder. 
+	2. Upload it as a file to google collaboration Jupiter Notebook.
+	3. Then unzip it (you need to hit refresh) before the code starts. (using the code below)
+	
 	
 	```
+	import os
 	if not os.path.isdir("cs231n"):
 	  import zipfile
 	  zip_ref = zipfile.ZipFile('cs231n.zip', 'r')

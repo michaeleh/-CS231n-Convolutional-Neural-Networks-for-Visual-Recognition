@@ -9,7 +9,7 @@ Here are my solutions for this above course (Spring 2017).
 Assignment list:
 
  * Assignment #1
- 	* Q1: k-Nearest Neighbor classifier (20 points)
+ 	* Q1: k-Nearest Neighbor classifier (20 points) [done]
  	* Q2: Training a Support Vector Machine (25 points) 
  	* Q3: Implement a Softmax classifier (20 points) 
  	* Q4: Two-Layer Neural Network (25 points) 

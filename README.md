@@ -17,7 +17,7 @@ Assignment list:
     
  - [ ] Assignment #2
  	- [X] Q1: Fully-connected Neural Network (25 points)
- 	- [ ] Q2: Batch Normalization (25 points)
+ 	- [X] Q2: Batch Normalization (25 points)
  	- [ ] Q3: Dropout (10 points)
  	- [ ] Q4: ConvNet on CIFAR-10 (30 points)
     - [ ] Q5: PyTorch / TensorFlow on CIFAR-10 (10 points)

@@ -16,7 +16,7 @@ Assignment list:
  	- [X] Q5: Higher Level Representations: Image Features (10 points)
     
  - [ ] Assignment #2
- 	- [ ] Q1: Fully-connected Neural Network (25 points)
+ 	- [X] Q1: Fully-connected Neural Network (25 points)
  	- [ ] Q2: Batch Normalization (25 points)
  	- [ ] Q3: Dropout (10 points)
  	- [ ] Q4: ConvNet on CIFAR-10 (30 points)

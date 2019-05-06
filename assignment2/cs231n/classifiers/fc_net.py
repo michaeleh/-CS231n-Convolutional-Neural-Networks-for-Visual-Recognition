@@ -207,6 +207,9 @@ class FullyConnectedNet(object):
         self.bn_params = []
         if self.use_batchnorm:
             self.bn_params = [{'mode': 'train'} for i in range(self.num_layers - 1)]
+            for i in range(self.num_layers - 1):
+                self.params['gamma%d' % (i + 1)] = np.ones(dims[i + 1])
+                self.params['beta%d' % (i + 1)] = np.zeros(dims[i + 1])
 
         # Cast all parameters to the correct datatype
         for k, v in self.params.items():
@@ -247,9 +250,20 @@ class FullyConnectedNet(object):
         cache_history = []
         L2reg = 0
         for i in range(hidden_num):
-            scores, cache = affine_relu_forward(scores, self.params['W%d' % (i + 1)],
+            if self.use_batchnorm:
+                scores, cache = affine_bn_relu_forward(scores,
+                                                       self.params['W%d' % (i + 1)],
+                                                       self.params['b%d' % (i + 1)],
+                                                       self.params['gamma%d' % (i + 1)],
+                                                       self.params['beta%d' % (i + 1)],
+                                                       self.bn_params[i])
+            else:
+                scores, cache = affine_relu_forward(scores, self.params['W%d' % (i + 1)],
                                                     self.params['b%d' % (i + 1)])
             cache_history.append(cache)
+            if self.use_dropout:
+                scores, cache = dropout_forward(scores, self.dropout_param)
+                cache_history.append(cache)
             L2reg += np.sum(self.params['W%d' % (i + 1)] ** 2)
         i += 1
         scores, cache = affine_forward(scores, self.params['W%d' % (i + 1)],
@@ -257,7 +271,7 @@ class FullyConnectedNet(object):
         cache_history.append(cache)
         L2reg += np.sum(self.params['W%d' % (i + 1)] ** 2)
         L2reg *= 0.5 * self.reg
-        pass
+
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
@@ -288,12 +302,41 @@ class FullyConnectedNet(object):
         grads['W%d' % (i + 1)] += self.reg * self.params['W%d' % (i + 1)]
         i -= 1
         while i >= 0:
-            dout, grads['W%d' % (i + 1)], grads['b%d' % (i + 1)] = affine_relu_backward(dout, cache_history.pop())
+            if self.use_dropout:
+                dout = dropout_backward(dout, cache_history.pop())
+            if self.use_batchnorm:
+                dout, grads['W%d' % (i + 1)], grads['b%d' % (i + 1)], grads['gamma%d' % (i + 1)], grads[
+                    'beta%d' % (i + 1)] = affine_bn_relu_backward(dout, cache_history.pop())
+            else:
+                dout, grads['W%d' % (i + 1)], grads['b%d' % (i + 1)] = affine_relu_backward(dout, cache_history.pop())
             grads['W%d' % (i + 1)] += self.reg * self.params['W%d' % (i + 1)]
             i -= 1
-        pass
+
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
 
         return loss, grads
+
+
+# Batch-Normalization Layer Utilities
+def affine_bn_relu_forward(x, w, b, gamma, beta, bn_param):
+    """
+    Convenience layer that performs an affine transform, batch normalization and ReLU
+    """
+    out1, fc_cache = affine_forward(x, w, b)
+    out2, bn_cache = batchnorm_forward(out1, gamma, beta, bn_param)
+    out3, relu_cache = relu_forward(out2)
+    cache = (fc_cache, bn_cache, relu_cache)
+    return out3, cache
+
+
+def affine_bn_relu_backward(dout, cache):
+    """
+        Backward pass for the affine-bn-relu convenience layer
+    """
+    fc_cache, bn_cache, relu_cache = cache
+    d1 = relu_backward(dout, relu_cache)
+    d2, dgamma, dbeta = batchnorm_backward(d1, bn_cache)
+    d3, dw, db = affine_backward(d2, fc_cache)
+    return d3, dw, db, dgamma, dbeta

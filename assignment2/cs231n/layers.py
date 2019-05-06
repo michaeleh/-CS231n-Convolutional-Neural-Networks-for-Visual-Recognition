@@ -22,9 +22,11 @@ def affine_forward(x, w, b):
     """
     out = None
     ###########################################################################
-    # TODO: Implement the affine forward pass. Store the result in out. You   #
+    # Implement the affine forward pass. Store the result in out. You         #
     # will need to reshape the input into rows.                               #
     ###########################################################################
+    out = x.reshape(x.shape[0], -1).dot(w) + b
+
     pass
     ###########################################################################
     #                             END OF YOUR CODE                            #
@@ -51,8 +53,12 @@ def affine_backward(dout, cache):
     x, w, b = cache
     dx, dw, db = None, None, None
     ###########################################################################
-    # TODO: Implement the affine backward pass.                               #
+    #  Implement the affine backward pass.                                    #
     ###########################################################################
+
+    dx = dout.dot(w.T).reshape(x.shape)
+    dw = x.reshape(x.shape[0], -1).T.dot(dout)
+    db = np.sum(dout, axis=0)
     pass
     ###########################################################################
     #                             END OF YOUR CODE                            #
@@ -73,8 +79,11 @@ def relu_forward(x):
     """
     out = None
     ###########################################################################
-    # TODO: Implement the ReLU forward pass.                                  #
+    #  Implement the ReLU forward pass.                                       #
     ###########################################################################
+
+    out = np.maximum(0, x)
+
     pass
     ###########################################################################
     #                             END OF YOUR CODE                            #
@@ -96,8 +105,11 @@ def relu_backward(dout, cache):
     """
     dx, x = None, cache
     ###########################################################################
-    # TODO: Implement the ReLU backward pass.                                 #
+    # Implement the ReLU backward pass.                                       #
     ###########################################################################
+
+    dx = (x > 0) * dout
+
     pass
     ###########################################################################
     #                             END OF YOUR CODE                            #

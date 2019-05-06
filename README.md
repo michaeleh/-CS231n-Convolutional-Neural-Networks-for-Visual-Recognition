@@ -21,7 +21,6 @@ Assignment list:
  	- [X] Q3: Dropout (10 points)
  	- [ ] Q4: ConvNet on CIFAR-10 (30 points)
     - [ ] Q5: PyTorch / TensorFlow on CIFAR-10 (10 points)
-    - [ ] Q6: Do something extra! (up to +10 points)
     
  - [ ] Assignment #3
  	- [ ] Q1: Image Captioning with Vanilla RNNs (25 points)

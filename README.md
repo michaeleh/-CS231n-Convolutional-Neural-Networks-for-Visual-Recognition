@@ -15,13 +15,13 @@ Assignment list:
  	- [X] Q4: Two-Layer Neural Network (25 points) 
  	- [X] Q5: Higher Level Representations: Image Features (10 points)
     
- - [ ] Assignment #2
+ - [X] Assignment #2
  	- [X] Q1: Fully-connected Neural Network (25 points)
  	- [X] Q2: Batch Normalization (25 points)
  	- [X] Q3: Dropout (10 points)
  	- [X] Q4: ConvNet on CIFAR-10 (30 points)
 	- [X] Q5: PyTorch on CIFAR-10 (10 points)
-	- [ ] Q6: TensorFlow on CIFAR-10 (10 points)
+	- [X] Q6: TensorFlow on CIFAR-10 (10 points)
 
     
  - [ ] Assignment #3

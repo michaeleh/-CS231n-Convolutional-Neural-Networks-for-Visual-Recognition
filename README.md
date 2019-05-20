@@ -24,12 +24,12 @@ Assignment list:
 	- [X] Q6: TensorFlow on CIFAR-10 (10 points)
 
     
- - [ ] Assignment #3
- 	- [ ] Q1: Image Captioning with Vanilla RNNs (25 points)
- 	- [ ] Q2: Image Captioning with LSTMs (30 points)
-    - [ ] Q3: Network Visualization: Saliency maps, Class Visualization, and Fooling Images (15 points)
- 	- [ ] Q4: Style Transfer (15 points)
- 	- [ ] Q5: Generative Adversarial Networks (15 points)
+ - [X] Assignment #3
+ 	- [X] Q1: Image Captioning with Vanilla RNNs (25 points)
+ 	- [X] Q2: Image Captioning with LSTMs (30 points)
+    - [X] Q3: Network Visualization: Saliency maps, Class Visualization, and Fooling Images (15 points)
+ 	- [X] Q4: Style Transfer (15 points)
+ 	- [X] Q5: Generative Adversarial Networks (15 points)
 	
 	
 	I wanted to use google collaboration Jupiter Notebook.
